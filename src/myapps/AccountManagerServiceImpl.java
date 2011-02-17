@@ -13,7 +13,7 @@ public class AccountManagerServiceImpl implements ServiceLifecycle {
 	ServletEndpointContext endPointCtx;
 		
 	public void init(Object context) throws ServiceException {
-		System.out.println("AccountManagerService.init() modified");		
+		System.out.println("AccountManagerService.init() added");		
 		endPointCtx = (ServletEndpointContext) context;		
 	}
 	
