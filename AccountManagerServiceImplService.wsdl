@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="AccountManagerServiceImplServiceDefinitions" targetNamespace="http://myapps" xmlns="" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://myapps" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://myapps" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="java:myapps"/>
+      <xs:element name="logout">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="logoutResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLoginData">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLoginDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="java:ArrayOfJavaLangstring_literal" xmlns:java="java:myapps"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="login">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="userName" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="loginResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="java:myapps" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfJavaLangstring_literal">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="JavaLangstring" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfJavaLangstring_literal" type="java:ArrayOfJavaLangstring_literal" xmlns:java="java:myapps"/>
+    </xs:schema>
+  </s0:types>
+  <s0:message name="logout">
+    <s0:part element="s1:logout" name="parameters"/>
+  </s0:message>
+  <s0:message name="logoutResponse">
+    <s0:part element="s1:logoutResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="getLoginData">
+    <s0:part element="s1:getLoginData" name="parameters"/>
+  </s0:message>
+  <s0:message name="getLoginDataResponse">
+    <s0:part element="s1:getLoginDataResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="login">
+    <s0:part element="s1:login" name="parameters"/>
+  </s0:message>
+  <s0:message name="loginResponse">
+    <s0:part element="s1:loginResponse" name="parameters"/>
+  </s0:message>
+  <s0:portType name="manager">
+    <s0:operation name="logout" parameterOrder="parameters">
+      <s0:input message="s1:logout"/>
+      <s0:output message="s1:logoutResponse"/>
+    </s0:operation>
+    <s0:operation name="getLoginData" parameterOrder="parameters">
+      <s0:input message="s1:getLoginData"/>
+      <s0:output message="s1:getLoginDataResponse"/>
+    </s0:operation>
+    <s0:operation name="login" parameterOrder="parameters">
+      <s0:input message="s1:login"/>
+      <s0:output message="s1:loginResponse"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="AccountManagerServiceImplServiceSoapBinding" type="s1:manager">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <s0:operation name="logout">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+    </s0:operation>
+    <s0:operation name="getLoginData">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+    <s0:operation name="login">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="AccountManagerServiceImplService">
+    <s0:port binding="s1:AccountManagerServiceImplServiceSoapBinding" name="managerSoapPort">
+      <s2:address location="http://localhost:7001/AccountManagerServiceImpl/AccountManagerServiceImpl"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

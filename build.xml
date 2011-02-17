@@ -1,0 +1,47 @@
+<project name="webservices">
+  <!-- 	This build file can be used from eclipse 3.1.2.
+  		for building & deploying web services to WLS9.2.	  
+  -->
+  <!-- set global properties for this build -->
+  <property file="build.properties" />
+    
+  <path id="client.class.path">
+    <pathelement path="${clientclass-dir}"/>
+    <pathelement path="${java.class.path}"/>
+  </path>
+
+  <taskdef name="jwsc"
+	classname="weblogic.wsee.tools.anttasks.JwscTask" classpath="${wls.server.classpath}"/>
+  <taskdef name="clientgen"
+	classname="weblogic.wsee.tools.anttasks.ClientGenTask"  classpath="${wls.server.classpath}"/>
+  <taskdef name="wldeploy"
+	classname="weblogic.ant.taskdefs.management.WLDeploy"  classpath="${wls.server.classpath}"/>
+  
+  <target name="clean" >
+	<delete dir="${example-output}"/>
+  	<delete dir="config"/>
+  </target>
+
+  <target name="build-service">
+    <jwsc srcdir="src" destdir="${ear-dir}" classpath="${wls.server.classpath}">
+       <jws file="${service.javafile.package}/${service.javafile}" />
+    </jwsc>
+  </target>
+
+  <target name="deploy" depends="build-service">
+    <wldeploy action="deploy" name="${ear.deployed.name}"
+	source="${ear-dir}" user="${wls.username}"
+	password="${wls.password}" verbose="true"
+	adminurl="t3://${wls.hostname}:${wls.port}"
+	targets="${wls.server.name}" />
+  </target>
+
+  <target name="undeploy">
+    <wldeploy action="undeploy" name="${ear.deployed.name}"
+    failonerror="false"
+    user="${wls.username}" password="${wls.password}" verbose="true"
+    adminurl="t3://${wls.hostname}:${wls.port}"
+    targets="${wls.server.name}" />
+  </target>
+
+</project>
